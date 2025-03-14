@@ -61,10 +61,15 @@ SUPPLY_WITH_DECIMALS=$(python3 -c "print(int($TOKEN_SUPPLY) * (10 ** int($TOKEN_
 # Select network for deployment
 gum style --foreground 6 --bold "Select Deployment Network:"
 gum style --foreground 7 "Choose the blockchain network where your token will be deployed."
-NETWORK=$(gum choose "Ethereum Mainnet" "Sepolia" "Goerli" "Polygon" "Optimism" "Arbitrum" "TEA Assam" "Local")
+NETWORK=$(gum choose "TEA Assam" "Ethereum Mainnet" "Sepolia" "Goerli" "Polygon" "Optimism" "Arbitrum" "Local")
 
 # Map selected network to RPC URL and chain ID
 case "$NETWORK" in
+  "TEA Assam")
+    RPC_URL="https://assam-rpc.tea.xyz"
+    BLOCK_EXPLORER="https://assam.tea.xyz"
+    CHAIN_ID=93384
+    ;;
   "Ethereum Mainnet")
     RPC_URL="https://ethereum-rpc.publicnode.com"
     BLOCK_EXPLORER="https://etherscan.io"
@@ -94,11 +99,6 @@ case "$NETWORK" in
     RPC_URL="https://arbitrum-one-rpc.publicnode.com"
     BLOCK_EXPLORER="https://arbiscan.io"
     CHAIN_ID=42161
-    ;;
-  "TEA Assam")
-    RPC_URL="https://assam-rpc.tea.xyz"
-    BLOCK_EXPLORER="https://assam.tea.xyz"
-    CHAIN_ID=93384
     ;;
   "Local")
     RPC_URL="http://localhost:8545"
